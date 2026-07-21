@@ -16,82 +16,60 @@ Prove that $S$ is invertible.
 
 ### Proof:
 
-Assume that $V$ is a finite-dimensional vector space and that $T : V \to V$ is a linear map satisfying $T^2 = T$. Let $\lambda$ be a scalar with $\lambda \neq 0$ and $\lambda \neq 1$, and define $S = T - \lambda I$, where $I : V \to V$ denotes the identity map.
+Assume that $V$ is a finite-dimensional vector space over a field $K$, and let $T : V \to V$ be a linear transformation such that $T^2 = T$. Let $\lambda \in K$ satisfy $\lambda \neq 0$ and $\lambda \neq 1$. Define $S : V \to V$ by $S = T - \lambda I$, where $I$ is the identity map on $V$.
 
-First, note that the condition $T^2 = T$ implies that for every $v \in V$ we have $T(T(v)) = T(v)$. In particular, if $v \in \operatorname{im}(T)$, then there exists $u \in V$ such that $v = T(u)$, and hence
-\[
-T(v) = T(T(u)) = T(u) = v.
-\]
-Therefore $T$ restricts to the identity map on $\operatorname{im}(T)$.
+To prove that $S$ is invertible, it is enough to prove that $S$ is injective, since $V$ is finite-dimensional and for linear maps on a finite-dimensional space, injectivity and surjectivity are equivalent, and each is equivalent to invertibility.
 
-Next, we show that every vector $v \in V$ can be written as a sum of a vector in $\ker(T)$ and a vector in $\operatorname{im}(T)$. Let $v \in V$ be arbitrary and define
+To show that $S$ is injective, it suffices to show that $\ker(S) = \{0\}$. Let $v \in V$ be an arbitrary vector such that $S(v) = 0$. By the definition of $S$, the equation $S(v) = 0$ means
 \[
-w := v - T(v).
+(T - \lambda I)(v) = 0.
 \]
-Then
+By linearity, this is equivalent to
 \[
-T(w) = T(v - T(v)) = T(v) - T(T(v)) = T(v) - T(v) = 0,
+T(v) - \lambda v = 0.
 \]
-so $w \in \ker(T)$. By definition, $T(v) \in \operatorname{im}(T)$. Hence every $v \in V$ can be written as
+Thus
 \[
-v = w + T(v)
-\]
-with $w \in \ker(T)$ and $T(v) \in \operatorname{im}(T)$, which shows that
-\[
-V = \ker(T) + \operatorname{im}(T).
+T(v) = \lambda v.
 \]
 
-We now prove that the sum $\ker(T) + \operatorname{im}(T)$ is direct. Let $v \in \ker(T) \cap \operatorname{im}(T)$. Since $v \in \ker(T)$, we have $T(v) = 0$. Since $v \in \operatorname{im}(T)$, we have seen above that $T(v) = v$. Combining these equalities, we obtain
+Next, apply $T$ once more to both sides of this equality. Using linearity of $T$, we obtain
 \[
-v = T(v) = 0.
+T(T(v)) = T(\lambda v).
 \]
-Thus $\ker(T) \cap \operatorname{im}(T) = \{0\}$, and hence
+Since $T$ is linear, $T(\lambda v) = \lambda T(v)$, and therefore
 \[
-V = \ker(T) \oplus \operatorname{im}(T).
+T(T(v)) = \lambda T(v).
+\]
+On the other hand, the assumption $T^2 = T$ means that for every $w \in V$ we have $T(T(w)) = T(w)$. Applying this to $w = v$, we get
+\[
+T(T(v)) = T(v).
+\]
+Combining the two equalities for $T(T(v))$, we obtain
+\[
+T(v) = \lambda T(v).
 \]
 
-We describe the action of $S$ on $\ker(T)$ and on $\operatorname{im}(T)$. Let $v \in \ker(T)$. Then $T(v) = 0$, and therefore
+Now rewrite this as
 \[
-S(v) = (T - \lambda I)(v) = T(v) - \lambda v = 0 - \lambda v = -\lambda v.
+T(v) - \lambda T(v) = 0.
 \]
-Thus $S$ acts on $\ker(T)$ as multiplication by the scalar $-\lambda$. Since $\lambda \neq 0$, the scalar $-\lambda$ is invertible, and hence the restriction of $S$ to $\ker(T)$ is an invertible linear map from $\ker(T)$ to itself.
+Factor out $T(v)$ to get
+\[
+(1 - \lambda) T(v) = 0.
+\]
+Since $\lambda \neq 1$, the scalar $1 - \lambda$ is nonzero. In a vector space over a field, if a nonzero scalar multiplies a vector to give $0$, then the vector must be $0$. Hence
+\[
+T(v) = 0.
+\]
 
-Similarly, let $v \in \operatorname{im}(T)$. Then, as shown above, $T(v) = v$, and therefore
+Recall also that we had $T(v) = \lambda v$. Combining this with $T(v) = 0$, we obtain
 \[
-S(v) = (T - \lambda I)(v) = T(v) - \lambda v = v - \lambda v = (1 - \lambda)v.
+\lambda v = 0.
 \]
-Thus $S$ acts on $\operatorname{im}(T)$ as multiplication by the scalar $1 - \lambda$. Since $\lambda \neq 1$, the scalar $1 - \lambda$ is invertible, and hence the restriction of $S$ to $\operatorname{im}(T)$ is an invertible linear map from $\operatorname{im}(T)$ to itself.
+Since $\lambda \neq 0$, again using that $V$ is a vector space over a field, it follows that $v = 0$.
 
-Because $V$ is the internal direct sum
-\[
-V = \ker(T) \oplus \operatorname{im}(T),
-\]
-every vector $v \in V$ can be written uniquely as $v = x + y$ with $x \in \ker(T)$ and $y \in \operatorname{im}(T)$. On such a decomposition, the map $S$ is given by
-\[
-S(v) = S(x + y) = S(x) + S(y) = -\lambda x + (1 - \lambda)y.
-\]
-The map $S$ is block-diagonal with respect to the decomposition $V = \ker(T) \oplus \operatorname{im}(T)$, with invertible diagonal blocks $-\lambda \cdot \operatorname{id}_{\ker(T)}$ on $\ker(T)$ and $(1 - \lambda) \cdot \operatorname{id}_{\operatorname{im}(T)}$ on $\operatorname{im}(T)$. A linear map that is invertible on each direct summand of a direct sum decomposition, and preserves that decomposition in this way, is invertible on the whole space.
-
-More explicitly, define a linear map $R : V \to V$ as follows. For $v \in V$, write uniquely $v = x + y$ with $x \in \ker(T)$ and $y \in \operatorname{im}(T)$, and set
-\[
-R(v) := -\tfrac{1}{\lambda}x + \tfrac{1}{1 - \lambda}y.
-\]
-This is well-defined and linear because the decomposition is direct and the coefficients are scalars. Then, for such $v = x + y$, we compute
-\[
-S(R(v)) = S\bigl(-\tfrac{1}{\lambda}x + \tfrac{1}{1 - \lambda}y\bigr)
-= -\lambda\bigl(-\tfrac{1}{\lambda}x\bigr) + (1 - \lambda)\bigl(\tfrac{1}{1 - \lambda}y\bigr)
-= x + y
-= v,
-\]
-and
-\[
-R(S(v)) = R\bigl(-\lambda x + (1 - \lambda)y\bigr)
-= -\tfrac{1}{\lambda}(-\lambda x) + \tfrac{1}{1 - \lambda}((1 - \lambda)y)
-= x + y
-= v.
-\]
-Thus $R$ is both a left and right inverse of $S$, so $S$ is invertible.
-
+Thus any vector $v \in V$ with $S(v) = 0$ must be the zero vector. Therefore $\ker(S) = \{0\}$, so $S$ is injective. Because $V$ is finite-dimensional, an injective linear map $V \to V$ is automatically surjective and hence invertible. Therefore $S$ is invertible.
 -/
 
 -- ### JSON Structured Proof
@@ -102,165 +80,144 @@ def example22 := json% {
     "body": [
       {
         "type": "Theorem",
+        "label": "thm:T-minus-lambdaI-invertible",
         "header": "Theorem",
-        "label": "thm:projection_shift_invertible",
         "hypothesis": [
+          {
+            "type": "let_statement",
+            "variable_name": "T",
+            "variable_type": "linear transformation from V to V",
+            "properties": "T^2 = T",
+            "statement": "Let T : V \\to V be a linear transformation on a finite-dimensional vector space satisfying T^2 = T."
+          },
           {
             "type": "let_statement",
             "variable_name": "V",
             "variable_type": "finite-dimensional vector space",
-            "statement": "Assume that V is a finite-dimensional vector space."
+            "statement": "Let V be a finite-dimensional vector space."
           },
           {
             "type": "let_statement",
-            "variable_name": "T",
-            "variable_type": "linear map T : V → V",
-            "properties": "T^2 = T",
-            "statement": "Assume that T : V → V is a linear map satisfying T^2 = T."
-          },
-          {
-            "type": "let_statement",
-            "variable_name": "λ",
+            "variable_name": "\\lambda",
             "variable_type": "scalar",
-            "properties": "λ ≠ 0 and λ ≠ 1",
-            "statement": "Let λ be a scalar with λ ≠ 0 and λ ≠ 1."
+            "properties": "\\lambda \\neq 0,1",
+            "statement": "Let \\lambda be a scalar with \\lambda \\neq 0,1."
           },
           {
             "type": "let_statement",
             "variable_name": "S",
-            "variable_type": "linear map S : V → V",
-            "value": "T - λ I",
-            "statement": "Define S = T - λ I, where I : V → V is the identity map."
+            "value": "T - \\lambda I",
+            "variable_type": "linear transformation from V to V",
+            "statement": "Define S = T - \\lambda I."
           }
         ],
-        "claim": "The linear map S = T - λ I is invertible.",
+        "claim": "S is invertible.",
         "proof": [
           {
             "type": "assert_statement",
-            "claim": "For every v ∈ V we have T(T(v)) = T(v), and in particular for every v in im(T) we have T(v) = v.",
-            "proof_method": "direct computation from T^2 = T",
+            "claim": "It is enough to prove that S is injective.",
             "results_used": [
               {
-                "statement": "T^2 = T"
+                "statement": "For a linear endomorphism of a finite-dimensional vector space, injectivity implies surjectivity, and hence invertibility."
+              }
+            ]
+          },
+          {
+            "type": "let_statement",
+            "variable_name": "v",
+            "variable_type": "element of V",
+            "statement": "Let v \\in V."
+          },
+          {
+            "type": "assume_statement",
+            "assumption": "S(v)=0."
+          },
+          {
+            "type": "assert_statement",
+            "claim": "(T-\\lambda I)(v)=0.",
+            "results_used": [
+              {
+                "statement": "S = T - \\lambda I."
               }
             ]
           },
           {
             "type": "assert_statement",
-            "claim": "For every v ∈ V, if v ∈ im(T) then T(v) = v.",
-            "proof_method": "apply T to v = T(u) for some u ∈ V and use T^2 = T",
+            "claim": "T(v)-\\lambda v=0.",
+            "proof_method": "by expanding the definition of (T-\\lambda I)(v)"
+          },
+          {
+            "type": "assert_statement",
+            "claim": "T(v)=\\lambda v.",
+            "proof_method": "by rearranging the equality"
+          },
+          {
+            "type": "assert_statement",
+            "claim": "T(T(v))=\\lambda T(v).",
             "results_used": [
               {
-                "statement": "If v = T(u) for some u ∈ V, then T(v) = T(T(u)) = T(u) = v, so T acts as the identity on im(T)."
+                "statement": "T is linear."
               }
             ]
           },
           {
             "type": "assert_statement",
-            "claim": "For every v ∈ V, the vector w := v - T(v) lies in ker(T).",
-            "proof_method": "direct computation",
+            "claim": "T(T(v))=T(v).",
             "results_used": [
               {
-                "statement": "T(w) = T(v - T(v)) = T(v) - T(T(v)) = T(v) - T(v) = 0, hence w ∈ ker(T)."
+                "statement": "T^2 = T."
               }
             ]
           },
           {
             "type": "assert_statement",
-            "claim": "Every v ∈ V can be written as v = w + T(v) with w ∈ ker(T) and T(v) ∈ im(T), so V = ker(T) + im(T).",
-            "proof_method": "use the decomposition v = (v - T(v)) + T(v)",
+            "claim": "T(v)=\\lambda T(v).",
+            "proof_method": "by combining the two previous equalities"
+          },
+          {
+            "type": "assert_statement",
+            "claim": "(1-\\lambda)T(v)=0.",
+            "proof_method": "by subtracting \\lambda T(v) from both sides"
+          },
+          {
+            "type": "assert_statement",
+            "claim": "T(v)=0.",
             "results_used": [
               {
-                "statement": "For each v ∈ V, w = v - T(v) ∈ ker(T) and T(v) ∈ im(T), so v is a sum of an element of ker(T) and an element of im(T)."
+                "statement": "\\lambda \\neq 1, so 1-\\lambda is nonzero."
               }
             ]
           },
           {
             "type": "assert_statement",
-            "claim": "ker(T) ∩ im(T) = {0}.",
-            "proof_method": "direct argument using T(v) = 0 and T(v) = v",
+            "claim": "\\lambda v=0.",
+            "proof_method": "by combining T(v)=\\lambda v with T(v)=0"
+          },
+          {
+            "type": "assert_statement",
+            "claim": "v=0.",
             "results_used": [
               {
-                "statement": "If v ∈ ker(T) ∩ im(T), then T(v) = 0 since v ∈ ker(T), and T(v) = v since v ∈ im(T); hence v = 0."
+                "statement": "\\lambda \\neq 0."
               }
             ]
           },
           {
             "type": "assert_statement",
-            "claim": "V = ker(T) ⊕ im(T).",
-            "proof_method": "show the sum is direct and equals V",
-            "results_used": [
-              {
-                "statement": "V = ker(T) + im(T) and ker(T) ∩ im(T) = {0} together imply V = ker(T) ⊕ im(T)."
-              }
-            ]
+            "claim": "\\ker(S)=\\{0\\}.",
+            "proof_method": "since every vector v with S(v)=0 is equal to 0"
           },
           {
             "type": "assert_statement",
-            "claim": "For every v ∈ ker(T), S(v) = -λ v, so S acts on ker(T) as multiplication by the scalar -λ.",
-            "proof_method": "direct computation",
-            "results_used": [
-              {
-                "statement": "If v ∈ ker(T), then T(v) = 0, so S(v) = (T - λ I)(v) = T(v) - λ v = -λ v."
-              }
-            ]
-          },
-          {
-            "type": "assert_statement",
-            "claim": "The restriction of S to ker(T) is an invertible linear map from ker(T) to itself.",
-            "proof_method": "scalar multiplication by a nonzero scalar is invertible",
-            "results_used": [
-              {
-                "statement": "Since λ ≠ 0, the scalar -λ is invertible, so the map v ↦ -λ v on ker(T) is invertible."
-              }
-            ]
-          },
-          {
-            "type": "assert_statement",
-            "claim": "For every v ∈ im(T), S(v) = (1 - λ) v, so S acts on im(T) as multiplication by the scalar 1 - λ.",
-            "proof_method": "direct computation using T(v) = v on im(T)",
-            "results_used": [
-              {
-                "statement": "If v ∈ im(T), then T(v) = v, so S(v) = (T - λ I)(v) = T(v) - λ v = v - λ v = (1 - λ) v."
-              }
-            ]
-          },
-          {
-            "type": "assert_statement",
-            "claim": "The restriction of S to im(T) is an invertible linear map from im(T) to itself.",
-            "proof_method": "scalar multiplication by a nonzero scalar is invertible",
-            "results_used": [
-              {
-                "statement": "Since λ ≠ 1, the scalar 1 - λ is invertible, so the map v ↦ (1 - λ) v on im(T) is invertible."
-              }
-            ]
-          },
-          {
-            "type": "assert_statement",
-            "claim": "With respect to the direct sum decomposition V = ker(T) ⊕ im(T), the map S is block-diagonal with diagonal blocks -λ · id_{ker(T)} on ker(T) and (1 - λ) · id_{im(T)} on im(T).",
-            "proof_method": "use the decomposition v = x + y with x ∈ ker(T), y ∈ im(T) and linearity of S",
-            "results_used": [
-              {
-                "statement": "For v = x + y with x ∈ ker(T), y ∈ im(T), we have S(v) = S(x) + S(y) = -λ x + (1 - λ) y."
-              }
-            ]
-          },
-          {
-            "type": "assert_statement",
-            "claim": "There exists a linear map R : V → V such that R is both a left and right inverse of S.",
-            "proof_method": "define R on the direct sum decomposition and verify SR = RS = id_V",
-            "results_used": [
-              {
-                "statement": "For v = x + y with x ∈ ker(T), y ∈ im(T), define R(v) = -1/λ x + 1/(1 - λ) y; then S(R(v)) = v and R(S(v)) = v."
-              }
-            ]
+            "claim": "S is injective.",
+            "proof_method": "by the definition of injectivity"
           },
           {
             "type": "conclude_statement",
-            "claim": "S is invertible as a linear map V → V.",
+            "claim": "S is invertible.",
             "results_used": [
               {
-                "statement": "A linear map with a two-sided inverse is invertible."
+                "statement": "For a linear endomorphism of a finite-dimensional vector space, injectivity implies surjectivity, and hence invertibility."
               }
             ]
           }
@@ -273,51 +230,8 @@ def example22 := json% {
 
 -- ## LeanCode generated by LeanAide
 
-  theorem is_unit_sub_smul_id_of_is_idempotent_of_ne_zero_of_ne_one :
-      ∀ {K : Type u} {V : Type v} [inst : Field K] [inst_1 : AddCommGroup V] [inst_2 : Module K V]
-        [FiniteDimensional K V] {T : V →ₗ[K] V},
-        T * T = T → ∀ {μ : K}, μ ≠ (0 : K) → μ ≠ (1 : K) → IsUnit (T - μ • (1 : V →ₗ[K] V)) :=
-    by
-    intro K V inst inst_1 inst_2 inst_7439058897038094550 T hT μ hμ0 hμ1
-    have assert_9640271237634751201 :
-      ∀ (T : V →ₗ[K] V),
-        T * T = T →
-          ∀ (μ : K),
-            μ ≠ (0 : K) →
-              μ ≠ (1 : K) →
-                (∀ (v : V), (T : V → V) ((T : V → V) v) = (T : V → V) v) ∧
-                  ∀ v ∈ LinearMap.range T, (T : V → V) v = v :=
-      by
-      repeat (sorry)
-    have assert_290240271064752550 :
-      ∀ (T : V →ₗ[K] V),
-        T ∘ₗ T = T →
-          ∀ (μ : K), μ ≠ (0 : K) → μ ≠ (1 : K) → ∀ v ∈ LinearMap.range T, (T : V → V) v = v :=
-      by repeat (sorry)
-    have assert_11918856549779650521 :
-      ∀ (T : V →ₗ[K] V),
-        T * T = T →
-          ∀ (c : K),
-            c ≠ (0 : K) →
-              c ≠ (1 : K) →
-                ∀ (μ : K),
-                  μ ≠ (0 : K) → μ ≠ (1 : K) → ∀ (v : V), v - (T : V → V) v ∈ LinearMap.ker T :=
-      by repeat (sorry)
-    have assert_5323617169768303690 :
-      ∀ (T : V →ₗ[K] V),
-        T * T = T → LinearMap.ker T ⊔ LinearMap.range T = ⊤ :=
-      by repeat (sorry)
-    have assert_3605381847287387093 :
-      ∀ (T : V →ₗ[K] V),
-        T * T = T →
-          ∀ (la mu : K),
-            la ≠ (0 : K) →
-              la ≠ (1 : K) →
-                mu ≠ (0 : K) → mu ≠ (1 : K) → LinearMap.ker T ⊓ LinearMap.range T = ⊥ :=
-      by repeat (sorry)
-    have assert_10502880745762333757 :
-      ∀ (T : V →ₗ[K] V),
-        T * T = T →
-          ∀ (μ : K), μ ≠ (0 : K) → μ ≠ (1 : K) → IsCompl (LinearMap.ker T) (LinearMap.range T) :=
-      by repeat (sorry)
-    sorry
+#leanaide_connect "http://drongo:8001"
+
+#codegen example22
+
+-- fails completely.

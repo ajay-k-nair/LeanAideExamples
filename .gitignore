@@ -1,1 +1,5 @@
 /.lake
+
+.logs/
+
+.leanaide_cache/
